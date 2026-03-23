@@ -98,26 +98,7 @@ Transformer is a neural network architecture used in modern NLP models.
 It uses self-attention to understand relationships between words.
 </p>
 
-<pre>
 
-Input Tokens
-   │
-   ▼
-Embedding Layer
-   │
-   ▼
-Self Attention
-   │
-   ▼
-Feed Forward Network
-   │
-   ▼
-Multiple Layers
-   │
-   ▼
-Output Probabilities
-
-</pre>
 
 <p>
 
@@ -136,6 +117,107 @@ Key concepts learned:
 </ul>
 
 <hr>
+<hr>
+
+<h2>Difficulties Faced During Development</h2>
+
+<p>
+While building this chatbot, I faced several practical issues related to
+token handling, model generation, warnings, and Git workflow.
+Solving these problems helped me understand the internal working of
+Transformer-based language models.
+</p>
+
+<ul>
+
+<li>
+<b>Difficulty 1 — Model giving random / nonsense output</b><br>
+Reason: Default generation parameters were not suitable for conversation.<br>
+Fix: Tuned temperature, top_k, top_p, and repetition_penalty.<br>
+Learning: Text generation quality depends heavily on sampling parameters.
+</li>
+
+<br>
+
+<li>
+<b>Difficulty 2 — Repeated words in response</b><br>
+Reason: Model was generating same tokens again and again.<br>
+Fix: Used no_repeat_ngram_size and repetition_penalty.<br>
+Learning: GPT models predict next token greedily without constraints.
+</li>
+
+<br>
+
+<li>
+<b>Difficulty 3 — Warning about attention_mask</b><br>
+Reason: pad_token_id and eos_token_id were same.<br>
+Fix: Added attention_mask manually.<br>
+Learning: Attention mask tells transformer which tokens are valid.
+</li>
+
+<br>
+
+<li>
+<b>Difficulty 4 — Context length overflow</b><br>
+Reason: Chat history kept increasing every turn.<br>
+Fix: Limited tokens to 512 using slicing.<br>
+Learning: All transformer models have max context length.
+</li>
+
+<br>
+
+<li>
+<b>Difficulty 5 — Full history printed in output</b><br>
+Reason: Decoding entire token sequence.<br>
+Fix: Decoded only new tokens after input length.<br>
+Learning: Must track input vs generated tokens.
+</li>
+
+<br>
+
+<li>
+<b>Difficulty 6 — Git push error (refspec main)</b><br>
+Reason: Branch not created before push.<br>
+Fix: Commit → rename branch → push.<br>
+Learning: Git requires commit before pushing.
+</li>
+
+<br>
+
+<li>
+<b>Difficulty 7 — Model unstable responses</b><br>
+Reason: Small model (DialoGPT small) has limited understanding.<br>
+Fix: Optimized generation parameters and history handling.<br>
+Learning: Model size affects response quality.
+</li>
+
+<br>
+
+<li>
+<b>Difficulty 8 — Understanding how GPT actually works</b><br>
+Reason: Initially treated model as black box.<br>
+Fix: Studied tokenization, transformer, attention, sampling.<br>
+Learning: LLM engineering requires understanding pipeline.
+</li>
+
+</ul>
+
+<hr>
+
+<h2>What This Project Taught Me</h2>
+
+<ul>
+
+<li>How LLM generates text step by step</li>
+<li>How tokens are stored in memory</li>
+<li>Why context limit matters</li>
+<li>How transformer attention works</li>
+<li>How to debug AI errors</li>
+<li>How to optimize generation</li>
+<li>How real chatbots manage history</li>
+<li>How to structure AI projects</li>
+
+</ul>
 
 <h2>How GPT Works Internally</h2>
 
